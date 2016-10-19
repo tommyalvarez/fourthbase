@@ -6,7 +6,7 @@ require 'second_base/railtie'
 require 'second_base/on_base'
 require 'second_base/forced'
 
-module SecondBase
+module ThirdBase
 
   extend ActiveSupport::Autoload
 

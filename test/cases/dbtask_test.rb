@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DbTaskTest < SecondBase::TestCase
+class DbTaskTest < ThirdBase::TestCase
 
   def test_db_create
     refute_dummy_databases
@@ -72,7 +72,7 @@ class DbTaskTest < SecondBase::TestCase
     refute_match %r{create_table "users"}, secondbase_schema
     refute_match %r{create_table "posts"}, secondbase_schema
     assert_match %r{create_table "comments"}, secondbase_schema
-    assert_connection_tables SecondBase::Base, ['comments']
+    assert_connection_tables ThirdBase::Base, ['comments']
   end
 
   def test_secondbase_migrate_updown
@@ -114,7 +114,7 @@ class DbTaskTest < SecondBase::TestCase
     secondbase_schema = File.read(dummy_secondbase_schema)
     assert_match %r{version: 20151202075826}, secondbase_schema
     assert_match %r{create_table "comments"}, secondbase_schema
-    # Can redo latest SecondBase migration using previous VERSION env.
+    # Can redo latest ThirdBase migration using previous VERSION env.
     version = dummy_migration[:version]
     run_db :migrate
     assert_match %r{version: #{version}}, File.read(dummy_secondbase_schema)
@@ -173,7 +173,7 @@ class DbTaskTest < SecondBase::TestCase
     Dir.chdir(dummy_root) { `rake db:test:load_schema` }
     establish_connection
     assert_connection_tables ActiveRecord::Base, ['users', 'posts']
-    assert_connection_tables SecondBase::Base, ['comments']
+    assert_connection_tables ThirdBase::Base, ['comments']
   end
 
   def test_abort_if_pending
@@ -196,7 +196,7 @@ class DbTaskTest < SecondBase::TestCase
     Dir.chdir(dummy_root) { `rake db:test:load_structure` }
     establish_connection
     assert_connection_tables ActiveRecord::Base, ['users', 'posts']
-    assert_connection_tables SecondBase::Base, ['comments']
+    assert_connection_tables ThirdBase::Base, ['comments']
   end
 
   def test_secondbase_version
@@ -223,10 +223,10 @@ class DbTaskTest < SecondBase::TestCase
   def assert_no_tables
     if ActiveRecord::Base.connection.respond_to? :data_sources
       assert_equal [], ActiveRecord::Base.connection.data_sources
-      assert_equal [], SecondBase::Base.connection.data_sources
+      assert_equal [], ThirdBase::Base.connection.data_sources
     else
       assert_equal [], ActiveRecord::Base.connection.tables
-      assert_equal [], SecondBase::Base.connection.tables
+      assert_equal [], ThirdBase::Base.connection.tables
     end
   end
 

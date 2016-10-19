@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RailtieTest < SecondBase::TestCase
+class RailtieTest < ThirdBase::TestCase
 
   def test_config
     expected_path = 'db/secondbase'
@@ -25,7 +25,7 @@ class RailtieTest < SecondBase::TestCase
   end
 
   def railtie_klass
-    SecondBase::Railtie
+    ThirdBase::Railtie
   end
 
 end

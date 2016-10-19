@@ -1,4 +1,4 @@
-module SecondBase
+module ThirdBase
   class Railtie < Rails::Railtie
 
     config.second_base = ActiveSupport::OrderedOptions.new

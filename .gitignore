@@ -7,3 +7,5 @@ pkg/
 Gemfile.lock
 *.gemfile.lock
 *.log
+.idea
+.DS_Store
