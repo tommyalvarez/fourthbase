@@ -1,11 +1,11 @@
 namespace :db do
-  namespace :second_base do
+  namespace :third_base do
     task :drop do
       ThirdBase.on_base { Rake::Task['db:drop'].execute }
     end
 
     namespace :migrate do
-      task :reset => ['db:second_base:drop', 'db:second_base:create', 'db:second_base:migrate']
+      task :reset => ['db:third_base:drop', 'db:third_base:create', 'db:third_base:migrate']
     end
   end
 end
@@ -17,6 +17,6 @@ end
   next unless task && ThirdBase::Railtie.run_with_db_tasks?
   task.enhance do
     Rake::Task["db:load_config"].invoke
-    Rake::Task["db:second_base:#{name}"].invoke
+    Rake::Task["db:third_base:#{name}"].invoke
   end
 end

@@ -74,7 +74,7 @@ module ThirdBase
 
     def run_secondbase(args, stream=:stdout)
       capture(stream) do
-        Dir.chdir(dummy_root) { Kernel.system "#{run_cmd} db:second_base:#{args}" }
+        Dir.chdir(dummy_root) { Kernel.system "#{run_cmd} db:third_base:#{args}" }
       end
     end
 

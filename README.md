@@ -34,13 +34,13 @@ secondbase:
 
 #### Database Tasks
 
-ThirdBase aims to work seamlessly within your Rails application. When it makes sense, we run a mirrored `db:second_base` task for matching ActiveRecord base database task. These can all be deactivated by setting `config.second_base.run_with_db_tasks = false` in your Application's configuration. For example:
+ThirdBase aims to work seamlessly within your Rails application. When it makes sense, we run a mirrored `db:third_base` task for matching ActiveRecord base database task. These can all be deactivated by setting `config.third_base.run_with_db_tasks = false` in your Application's configuration. For example:
 
 ```shell
 $ rake db:create
 ```
 
-This will not only create your base development database, but it will also create your second database as specified by the configuration within the `:secondbase` section of your database.yml. Below is a complete list of `:db` tasks that automatically run a mirrored `:db:second_base` task. Some private or over lapping tasks, like schema dump/loading or `db:setup`, are not listed.
+This will not only create your base development database, but it will also create your second database as specified by the configuration within the `:secondbase` section of your database.yml. Below is a complete list of `:db` tasks that automatically run a mirrored `:db:third_base` task. Some private or over lapping tasks, like schema dump/loading or `db:setup`, are not listed.
 
 * db:create
 * db:create:all
@@ -54,24 +54,24 @@ This will not only create your base development database, but it will also creat
 
 Not all base database tasks make sense to run a mirrored ThirdBase task. These include tasks that move a single migration up/down, reporting on your database's current status/version, and others. These tasks have to be run explicitly and only operate on your ThirdBase database. Each support any feature that their matching `:db` task has. For example, using `VERSION=123` to target a specific migration.
 
-* db:second_base:migrate:up
-* db:second_base:migrate:down
-* db:second_base:migrate:reset
-* db:second_base:migrate:redo
-* db:second_base:migrate:status
-* db:second_base:rollback
-* db:second_base:forward
-* db:second_base:version
+* db:third_base:migrate:up
+* db:third_base:migrate:down
+* db:third_base:migrate:reset
+* db:third_base:migrate:redo
+* db:third_base:migrate:status
+* db:third_base:rollback
+* db:third_base:forward
+* db:third_base:version
 
 #### Migration Generator
 
 ThirdBase migrations are stored in your application's `db/secondbase/migrate` directory. Likewise, ThirdBase will also dump your schema/structure file into the `db/secondbase` directory. Full support for ActiveRecord's schema format being set to either `:ruby` or `:sql` is supported.
 
-Migrations can be generated using the `second_base:migration` name. Our generator is a subclass of ActiveRecord's. This means the ThirdBase migration generator supports whatever features and arguments are supported by your current Rails version. For example:
+Migrations can be generated using the `third_base:migration` name. Our generator is a subclass of ActiveRecord's. This means the ThirdBase migration generator supports whatever features and arguments are supported by your current Rails version. For example:
 
 ```shell
-$ rails generate second_base:migration CreateWidgetsTable
-$ rails generate second_base:migration AddTitleBodyToPost title:string body:text
+$ rails generate third_base:migration CreateWidgetsTable
+$ rails generate third_base:migration AddTitleBodyToPost title:string body:text
 ```
 
 #### Models
@@ -95,20 +95,20 @@ Sometimes you want to force a model that inherits from `ActiveRecord::Base` to u
 We recomend forcing modules using a Rails initializer. This example below forces both the [DelayedJob ActiveRecord Backend](https://github.com/collectiveidea/delayed_job_active_record) and ActiveRecord session store to use your ThirdBase database.
 
 ```ruby
-# In config/initializers/second_base.rb
+# In config/initializers/third_base.rb
 Delayed::Backend::ActiveRecord::Job.extend ThirdBase::Forced
 ActiveRecord::SessionStore::Session.extend ThirdBase::Forced
 ```
 
 #### Testing & DB Synchronization
 
-Rails 4.2 brought about a new way to keep your test database in sync by checking schema migrations. Where previously forcing a full test database schema load, Rails 4.2 and up is able to run your tests much faster. In order for ThirdBase to take advantage of this, you will need to include our test help file directly following the Rails one. Open your `test_helper.rb` and add our `second_base/test_help` after `rails/test_help`.
+Rails 4.2 brought about a new way to keep your test database in sync by checking schema migrations. Where previously forcing a full test database schema load, Rails 4.2 and up is able to run your tests much faster. In order for ThirdBase to take advantage of this, you will need to include our test help file directly following the Rails one. Open your `test_helper.rb` and add our `third_base/test_help` after `rails/test_help`.
 
 ```ruby
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'second_base/test_help'
+require 'third_base/test_help'
 ```
 
 #### Configurations
@@ -116,8 +116,8 @@ require 'second_base/test_help'
 All ThirdBase railtie settings are best done in a `config/application.rb` file. We support the following configurations:
 
 ```ruby
-config.second_base.path        # Default: 'db/secondbase'
-config.second_base.config_key  # Default: 'secondbase'
+config.third_base.path        # Default: 'db/secondbase'
+config.third_base.config_key  # Default: 'secondbase'
 ```
 
 * `path` - Used as location for migrations & schema. Path is relative to application root.

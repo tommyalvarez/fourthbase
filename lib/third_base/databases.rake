@@ -1,5 +1,5 @@
 namespace :db do
-  namespace :second_base do
+  namespace :third_base do
 
     namespace :create do
       task :all do
@@ -116,6 +116,6 @@ end
   next unless task && ThirdBase::Railtie.run_with_db_tasks?
   task.enhance do
     Rake::Task["db:load_config"].invoke
-    Rake::Task["db:second_base:#{name}"].invoke
+    Rake::Task["db:third_base:#{name}"].invoke
   end
 end

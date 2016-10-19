@@ -2,7 +2,7 @@ ENV['RAILS_ENV'] ||= 'test'
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 require 'bundler/setup'
 Bundler.require :default, :development
-require 'second_base'
+require 'third_base'
 require 'active_support/test_case'
 require 'active_support/testing/autorun'
 

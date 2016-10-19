@@ -1,5 +1,5 @@
 $:.push File.expand_path('../lib', __FILE__)
-require 'second_base/version'
+require 'third_base/version'
 
 Gem::Specification.new do |s|
   s.name          = 'secondbase'
