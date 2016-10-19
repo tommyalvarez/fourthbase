@@ -2,12 +2,12 @@ $:.push File.expand_path('../lib', __FILE__)
 require 'third_base/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'secondbase'
+  s.name          = 'thirdbase'
   s.version       = ThirdBase::VERSION
   s.platform      = Gem::Platform::RUBY
   s.authors       = ['Karle Durante', 'Hunter Madison', 'Ken Collins']
   s.email         = ['kdurante@customink.com', 'hunterglenmadison@icloud.com', 'ken@metaskills.net']
-  s.homepage      = 'http://github.com/customink/secondbase'
+  s.homepage      = 'http://github.com/customink/thirdbase'
   s.summary       = 'Seamless second database integration for Rails.'
   s.description   = "ThirdBase provides support for Rails to manage dual databases by extending ActiveRecord tasks that create, migrate, and test your databases."
   s.files         = `git ls-files`.split("\n")

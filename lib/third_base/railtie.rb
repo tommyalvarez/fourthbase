@@ -2,13 +2,13 @@ module ThirdBase
   class Railtie < Rails::Railtie
 
     config.third_base = ActiveSupport::OrderedOptions.new
-    config.third_base.path = 'db/secondbase'
-    config.third_base.config_key = 'secondbase'
+    config.third_base.path = 'db/thirdbase'
+    config.third_base.config_key = 'thirdbase'
     config.third_base.run_with_db_tasks = true
 
     config.after_initialize do |app|
-      secondbase_dir = app.root.join(config.third_base.path)
-      FileUtils.mkdir(secondbase_dir) unless File.directory?(secondbase_dir)
+      thirdbase_dir = app.root.join(config.third_base.path)
+      FileUtils.mkdir(thirdbase_dir) unless File.directory?(thirdbase_dir)
     end
 
     rake_tasks do
@@ -27,8 +27,8 @@ module ThirdBase
     end
 
     initializer 'third_base.add_watchable_files' do |app|
-      secondbase_dir = app.root.join(config.third_base.path)
-      config.watchable_files.concat ["#{secondbase_dir}/schema.rb", "#{secondbase_dir}/structure.sql"]
+      thirdbase_dir = app.root.join(config.third_base.path)
+      config.watchable_files.concat ["#{thirdbase_dir}/schema.rb", "#{thirdbase_dir}/structure.sql"]
     end
 
     def config_path

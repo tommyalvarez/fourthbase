@@ -19,7 +19,7 @@ class GeneratorTest < ThirdBase::TestCase
 
   def test_migration
     output = Dir.chdir(dummy_root) { `rails g third_base:migration CreateFavorites post_id:integer count:integer` }
-    assert_match %r{create.*db/secondbase/migrate/.*create_favorites\.rb}, output
+    assert_match %r{create.*db/thirdbase/migrate/.*create_favorites\.rb}, output
     migration = generated_migration_data
     assert_match %r{create_table :favorites}, migration
     assert_match %r{t.integer :post_id}, migration
@@ -38,7 +38,7 @@ class GeneratorTest < ThirdBase::TestCase
   private
 
   def generated_migration
-    Dir["#{dummy_db}/secondbase/migrate/*favorites.{rb}"].first
+    Dir["#{dummy_db}/thirdbase/migrate/*favorites.{rb}"].first
   end
 
   def generated_migration_data

@@ -3,16 +3,16 @@
 <hr>
 Seamless second database integration for Rails. ThirdBase provides support for Rails to manage dual databases by extending ActiveRecord tasks that create, migrate, and test your databases.
 
-* [Using ThirdBase To Provide Some Level Of Sanity](http://technology.customink.com/blog/2016/01/10/two-headed-cat-using-secondbase-to-provide-some-level-of-sanity-in-a-two-database-rails-application/)
+* [Using ThirdBase To Provide Some Level Of Sanity](http://technology.customink.com/blog/2016/01/10/two-headed-cat-using-thirdbase-to-provide-some-level-of-sanity-in-a-two-database-rails-application/)
 * [Rails Multi-Database Best Practices Roundup](http://technology.customink.com/blog/2015/06/22/rails-multi-database-best-practices-roundup/)
 
-[![Gem Version](https://badge.fury.io/rb/secondbase.png)](http://badge.fury.io/rb/secondbase)
-[![Build Status](https://travis-ci.org/customink/secondbase.svg?branch=master)](https://travis-ci.org/customink/secondbase)
+[![Gem Version](https://badge.fury.io/rb/thirdbase.png)](http://badge.fury.io/rb/thirdbase)
+[![Build Status](https://travis-ci.org/customink/thirdbase.svg?branch=master)](https://travis-ci.org/customink/thirdbase)
 
 
 ## Usage
 
-To get started with your new second database, update your database.yml to include a `secondbase` config key. All ThirdBase configurations per Rails environment go under this config key.
+To get started with your new second database, update your database.yml to include a `thirdbase` config key. All ThirdBase configurations per Rails environment go under this config key.
 
 ```yaml
 # Default configurations:
@@ -23,7 +23,7 @@ test:
   adapter: sqlserver
   database: myapp_test
 # ThirdBase configurations:
-secondbase:
+thirdbase:
   development:
     adapter: mysql
     database: myapp_development
@@ -40,7 +40,7 @@ ThirdBase aims to work seamlessly within your Rails application. When it makes s
 $ rake db:create
 ```
 
-This will not only create your base development database, but it will also create your second database as specified by the configuration within the `:secondbase` section of your database.yml. Below is a complete list of `:db` tasks that automatically run a mirrored `:db:third_base` task. Some private or over lapping tasks, like schema dump/loading or `db:setup`, are not listed.
+This will not only create your base development database, but it will also create your second database as specified by the configuration within the `:thirdbase` section of your database.yml. Below is a complete list of `:db` tasks that automatically run a mirrored `:db:third_base` task. Some private or over lapping tasks, like schema dump/loading or `db:setup`, are not listed.
 
 * db:create
 * db:create:all
@@ -65,7 +65,7 @@ Not all base database tasks make sense to run a mirrored ThirdBase task. These i
 
 #### Migration Generator
 
-ThirdBase migrations are stored in your application's `db/secondbase/migrate` directory. Likewise, ThirdBase will also dump your schema/structure file into the `db/secondbase` directory. Full support for ActiveRecord's schema format being set to either `:ruby` or `:sql` is supported.
+ThirdBase migrations are stored in your application's `db/thirdbase/migrate` directory. Likewise, ThirdBase will also dump your schema/structure file into the `db/thirdbase` directory. Full support for ActiveRecord's schema format being set to either `:ruby` or `:sql` is supported.
 
 Migrations can be generated using the `third_base:migration` name. Our generator is a subclass of ActiveRecord's. This means the ThirdBase migration generator supports whatever features and arguments are supported by your current Rails version. For example:
 
@@ -116,8 +116,8 @@ require 'third_base/test_help'
 All ThirdBase railtie settings are best done in a `config/application.rb` file. We support the following configurations:
 
 ```ruby
-config.third_base.path        # Default: 'db/secondbase'
-config.third_base.config_key  # Default: 'secondbase'
+config.third_base.path        # Default: 'db/thirdbase'
+config.third_base.config_key  # Default: 'thirdbase'
 ```
 
 * `path` - Used as location for migrations & schema. Path is relative to application root.
@@ -140,7 +140,7 @@ test:
 production:
   url: <%= ENV.fetch('DATABASE_URL') %>
 
-secondbase:
+thirdbase:
   development:
     database: encom-mysql_development
     url: <%= ENV.fetch('DATABASE_URL_SECONDBASE') %>
