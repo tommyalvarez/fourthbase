@@ -1,7 +1,7 @@
 
 ![ThirdBase Logo](https://cloud.githubusercontent.com/assets/2381/12219457/5a5aab4e-b712-11e5-92e1-de6487aa0809.png)
 <hr>
-Seamless second database integration for Rails. ThirdBase provides support for Rails to manage dual databases by extending ActiveRecord tasks that create, migrate, and test your databases.
+Seamless third database integration for Rails. ThirdBase provides support for Rails to manage dual databases by extending ActiveRecord tasks that create, migrate, and test your databases.
 
 * [Using ThirdBase To Provide Some Level Of Sanity](http://technology.customink.com/blog/2016/01/10/two-headed-cat-using-thirdbase-to-provide-some-level-of-sanity-in-a-two-database-rails-application/)
 * [Rails Multi-Database Best Practices Roundup](http://technology.customink.com/blog/2015/06/22/rails-multi-database-best-practices-roundup/)
@@ -12,7 +12,7 @@ Seamless second database integration for Rails. ThirdBase provides support for R
 
 ## Usage
 
-To get started with your new second database, update your database.yml to include a `thirdbase` config key. All ThirdBase configurations per Rails environment go under this config key.
+To get started with your new third database, update your database.yml to include a `thirdbase` config key. All ThirdBase configurations per Rails environment go under this config key.
 
 ```yaml
 # Default configurations:
@@ -40,7 +40,7 @@ ThirdBase aims to work seamlessly within your Rails application. When it makes s
 $ rake db:create
 ```
 
-This will not only create your base development database, but it will also create your second database as specified by the configuration within the `:thirdbase` section of your database.yml. Below is a complete list of `:db` tasks that automatically run a mirrored `:db:third_base` task. Some private or over lapping tasks, like schema dump/loading or `db:setup`, are not listed.
+This will not only create your base development database, but it will also create your third database as specified by the configuration within the `:thirdbase` section of your database.yml. Below is a complete list of `:db` tasks that automatically run a mirrored `:db:third_base` task. Some private or over lapping tasks, like schema dump/loading or `db:setup`, are not listed.
 
 * db:create
 * db:create:all
@@ -76,7 +76,7 @@ $ rails generate third_base:migration AddTitleBodyToPost title:string body:text
 
 #### Models
 
-Any model who's table resides in your second database needs to inherit from `ThirdBase::Base`. ActiveRecord associations will still work between your base ActiveRecord and ThirdBase models!
+Any model who's table resides in your third database needs to inherit from `ThirdBase::Base`. ActiveRecord associations will still work between your base ActiveRecord and ThirdBase models!
 
 ```ruby
 class Widget < ThirdBase::Base
@@ -143,12 +143,12 @@ production:
 thirdbase:
   development:
     database: encom-mysql_development
-    url: <%= ENV.fetch('DATABASE_URL_SECONDBASE') %>
+    url: <%= ENV.fetch('DATABASE_URL_THIRDBASE') %>
   test:
     database: encom-mysql_test
-    url: <%= ENV.fetch('DATABASE_URL_SECONDBASE') %>
+    url: <%= ENV.fetch('DATABASE_URL_THIRDBASE') %>
   production:
-    url: <%= ENV.fetch('DATABASE_URL_SECONDBASE') %>
+    url: <%= ENV.fetch('DATABASE_URL_THIRDBASE') %>
 ```
 
 There are many ways to use Dotenv and enviornment variables. This is only one example and we hope it helps you decide on which is best for you.
@@ -159,9 +159,9 @@ Rails only knows about your base connection for the Rack-based query cache. In o
 
 ```ruby
 class ApplicationController < ActionController::Base
-  around_filter :query_cache_secondBase
+  around_filter :query_cache_thirdBase
   private
-  def query_cache_secondBase
+  def query_cache_thirdBase
     ThirdBase::Base.connection.cache { yield }
   end
 end

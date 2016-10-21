@@ -66,7 +66,7 @@ class DbTaskTest < ThirdBase::TestCase
     assert_match %r{create_table "posts"}, schema
     refute_match %r{create_table "comments"}, schema
     assert_connection_tables ActiveRecord::Base, ['users', 'posts']
-    # Second database and schema.
+    # Third database and schema.
     thirdbase_schema = File.read(dummy_thirdbase_schema)
     assert_match %r{version: 20151202075826}, thirdbase_schema
     refute_match %r{create_table "users"}, thirdbase_schema

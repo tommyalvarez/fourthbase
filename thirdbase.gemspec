@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors       = ['Karle Durante', 'Hunter Madison', 'Ken Collins']
   s.email         = ['kdurante@customink.com', 'hunterglenmadison@icloud.com', 'ken@metaskills.net']
   s.homepage      = 'http://github.com/customink/thirdbase'
-  s.summary       = 'Seamless second database integration for Rails.'
+  s.summary       = 'Seamless third database integration for Rails.'
   s.description   = "ThirdBase provides support for Rails to manage dual databases by extending ActiveRecord tasks that create, migrate, and test your databases."
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
