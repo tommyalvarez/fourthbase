@@ -1,15 +1,15 @@
 $:.push File.expand_path('../lib', __FILE__)
-require 'third_base/version'
+require 'fourth_base/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'thirdbase'
-  s.version       = ThirdBase::VERSION
+  s.name          = 'fourthbase'
+  s.version       = FourthBase::VERSION
   s.platform      = Gem::Platform::RUBY
   s.authors       = ['Karle Durante', 'Hunter Madison', 'Ken Collins']
   s.email         = ['kdurante@customink.com', 'hunterglenmadison@icloud.com', 'ken@metaskills.net']
-  s.homepage      = 'http://github.com/customink/thirdbase'
-  s.summary       = 'Seamless third database integration for Rails.'
-  s.description   = "ThirdBase provides support for Rails to manage dual databases by extending ActiveRecord tasks that create, migrate, and test your databases."
+  s.homepage      = 'http://github.com/tommyalvarez/fourthbase'
+  s.summary       = 'Seamless fourth database integration for Rails.'
+  s.description   = "FourthBase provides support for Rails to manage dual databases by extending ActiveRecord tasks that create, migrate, and test your databases."
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }

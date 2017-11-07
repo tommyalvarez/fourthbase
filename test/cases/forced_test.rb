@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ForcedTest < ThirdBase::TestCase
+class ForcedTest < FourthBase::TestCase
 
   setup do
     run_db :create
@@ -9,19 +9,19 @@ class ForcedTest < ThirdBase::TestCase
   end
 
   def test_shared_pool
-    assert_equal ThirdBase::Base.connection_pool.object_id,
+    assert_equal FourthBase::Base.connection_pool.object_id,
                  CommentForced.connection_pool.object_id
   end
 
   def test_shared_connection
-    assert_equal ThirdBase::Base.connection.raw_connection.object_id,
+    assert_equal FourthBase::Base.connection.raw_connection.object_id,
                  CommentForced.connection.raw_connection.object_id
   end
 
   def test_shared_new_connection_in_a_different_thread
-    current_base_connection_id = ThirdBase::Base.connection.raw_connection.object_id
+    current_base_connection_id = FourthBase::Base.connection.raw_connection.object_id
     new_base_connection_id, new_forced_connection_id = Thread.new {
-      [ ThirdBase::Base.connection.raw_connection.object_id,
+      [ FourthBase::Base.connection.raw_connection.object_id,
         CommentForced.connection.raw_connection.object_id ]
     }.value
     refute_equal new_base_connection_id, current_base_connection_id
@@ -29,15 +29,15 @@ class ForcedTest < ThirdBase::TestCase
   end
 
   def test_shared_connected_query
-    assert ThirdBase::Base.connected?
+    assert FourthBase::Base.connected?
     assert CommentForced.connected?
     CommentForced.clear_all_connections!
-    refute ThirdBase::Base.connected?
+    refute FourthBase::Base.connected?
     refute CommentForced.connected?
   end
 
   def test_can_remove_connection_properly
-    base_connection = ThirdBase::Base.connection
+    base_connection = FourthBase::Base.connection
     forced_connection = CommentForced.connection
     assert base_connection.active?
     assert forced_connection.active?

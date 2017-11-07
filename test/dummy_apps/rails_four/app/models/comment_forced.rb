@@ -3,4 +3,4 @@ class CommentForced < ActiveRecord::Base
   belongs_to :user
 end
 
-CommentForced.extend ThirdBase::Forced
+CommentForced.extend FourthBase::Forced

@@ -3,4 +3,4 @@ class CommentForced < ApplicationRecord
   belongs_to :user
 end
 
-CommentForced.extend ThirdBase::Forced
+CommentForced.extend FourthBase::Forced

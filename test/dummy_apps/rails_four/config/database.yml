@@ -3,11 +3,11 @@ test:
   adapter: sqlite3
   database: ./db/base.sqlite3
 
-thirdbase:
+fourthbase:
 
   test:
     adapter: mysql
-    database: 'thirdbase_test'
+    database: 'fourthbase_test'
     username: root
     password:
     host: localhost
