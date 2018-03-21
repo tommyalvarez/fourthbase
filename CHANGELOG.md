@@ -2,6 +2,10 @@
 
 Please follow the format set down in http://keepachangelog.com
 
+## 2.1.5
+
+Added Rails 5.1 support.
+
 ## 2.1.1
 
 Test updates to track rails 5 rc2.
